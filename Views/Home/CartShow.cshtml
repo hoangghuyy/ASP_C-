@@ -1,0 +1,98 @@
+﻿@{
+	ViewData["Title"] = "ShowListCart";
+}
+
+
+<section class="h-100 h-custom" style="background-color: #d2c9ff;">
+	<div class="container py-5 h-100">
+		<div class="row d-flex justify-content-center align-items-center h-100">
+			<div class="col-12">
+				<div class="card card-registration card-registration-2" style="border-radius: 15px;">
+					<div class="card-body p-0">
+						<div class="row g-0">
+							<div class="col-lg">
+								<div class="p-5">
+									<div class="d-flex justify-content-between align-items-center mb-5">
+										<h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
+										<h6 class="mb-0 text-muted">3 items</h6>
+									</div>
+									@foreach (var cartItem in ViewBag.carts)
+									{
+										<hr class="my-4">
+
+										<div class="row mb-4 d-flex justify-content-between align-items-center">
+											<div class="col-md-2 col-lg-2 col-xl-2">
+												<img src="@Url.Content(cartItem.Product.ImagePath)"
+													 class="img-fluid rounded-3" alt="Cotton T-shirt">
+											</div>
+											<div class="col-md-3 col-lg-3 col-xl-3">
+												<h6 class="text-black mb-0">@cartItem.Product.Title</h6>
+											</div>
+											<div class="col-md-3 col-lg-3 col-xl-2">
+												<form asp-action="UpdateCart" method="post">
+													<input type="hidden" name="Id" value="@cartItem.Product.Id" />
+													<input id="form1" min="0" name="Quantity" value="@cartItem.Quantity" type="number"
+														   class="form-control form-control-sm mb-2" />
+													<button type="submit" class="btn btn-danger">Update</button>
+												</form>
+											</div>
+
+											<div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+												<h6 class="mb-0">@(cartItem.Quantity * cartItem.Product.Price)</h6>
+											</div>
+											<div class="col-md-1 col-lg-1 col-xl-1 text-end">
+												<a asp-action="DeleteCart" asp-route-id="@cartItem.Product.Id" class="text-muted">x</a>
+											</div>
+										</div>
+
+										<hr class="my-4">
+									}
+								
+									<!-- Button trigger modal -->
+									<button type="button" class="btn btn-dark btn-block btn-lg" data-toggle="modal" data-target="#exampleModal">
+										Checkout
+									</button>
+
+
+									<!-- Modal -->
+									 <form  asp-action="ProductOrder" method="post" class="add-to-cart mt-3">
+									<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<label class="form-label" for="dm-ecom-product-email">Email:</label>
+													<input type="text" class="form-control" id="dm-ecom-product-email" name="Email">
+													<br/>
+													<label class="form-label" for="dm-ecom-product-phone">Phone:</label>
+													<input type="text" class="form-control" id="dm-ecom-product-phone" name="Phone">
+													<br />
+													<label class="form-label" for="dm-ecom-product-email">Name:</label>
+													<input type="text" class="form-control" id="dm-ecom-product-name" name="Name">
+													<br />
+													<label class="form-label" for="dm-ecom-product-address">Address</label>
+													<input type="text" class="form-control" id="dm-ecom-product-address" name="Address">
+													<br />
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+													<button type="submit" class="btn btn-primary">Save</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

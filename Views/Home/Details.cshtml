@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Details";
+}
+
+@model Web_Asm2.Models.Product
+
+
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="@Model.ImagePath" alt="..." /></div>
+            <div class="col-md-6">
+                <div class="small mb-1">SKU: BST-498</div>
+                <h1 class="display-5 fw-bolder"> @Html.DisplayFor(model => model.Title)</h1>
+                <div class="fs-5">
+                    <span>@Html.DisplayFor(model => model.Price) Vnđ</span>
+                </div>
+                <p class="lead">@Html.DisplayFor(model => model.Description)</p>
+                <div class="d-flex">
+                    <form  asp-action="CartCart" method="post" class="add-to-cart mt-3">
+                        <div class="qty-label">
+                            Qty
+                            <div class="input-group mb-3">
+                                <input type="number" name="quantity" class="form-control text-center" value="1" required>
+                            </div>
+                            <input type="hidden" asp-for="Id" />
+                        </div>
+                        <button type="submit" class="add-to-cart-btn btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

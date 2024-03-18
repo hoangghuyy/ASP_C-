@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h2>ShowOrder</h2>
+
+
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">ID</th>
+			<th scope="col">Name</th>
+			<th scope="col">Image</th>
+			<th scope="col">Date</th>
+			<th scope="col">Email</th>
+			<th scope="col">Address</th>
+			<th scope="col">Status</th>
+			<th scope="col">Total price</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var order in ViewBag.OrdersWithProducts)
+		{
+			<tr>
+				<th scope="row">@order.Order.Id</th>
+				<td>@order.Product.Title</td>
+				<td><img style="max-width: 100px; max-height: 100px;" src="@Url.Content(order.Product.ImagePath )" alt="Course Image" /></td>
+				<td>@order.Order.Date</td>
+				<td>@order.Order.Email</td>
+				<td>@order.Order.Address</td>
+				<td>Pending</td>
+				<td>@order.Order.TotalPrice Đ</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<div class="float-right">
+	<a class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" asp-area="" asp-controller="Home" asp-action="Index">Back to shopping</a>
+</div>
